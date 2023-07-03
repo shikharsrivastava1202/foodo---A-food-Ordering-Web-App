@@ -1,0 +1,31 @@
+{
+  "name": "foodo",
+  "version": "1.0.0",
+  "description": "This is a Food Orderind Web App",
+  "main": "App.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shikharsrivastava1202/foodo-A-food-Ordering-Web-App.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Shikhar Srivastava",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shikharsrivastava1202/foodo-A-food-Ordering-Web-App/issues"
+  },
+  "homepage": "https://github.com/shikharsrivastava1202/foodo-A-food-Ordering-Web-App#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}

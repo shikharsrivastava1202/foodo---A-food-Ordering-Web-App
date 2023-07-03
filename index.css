@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+#heading {
+  color: red;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  background-color: grey;
+  box-shadow: -1px 4px 20px 14px rgba(0, 0, 0, 0.2);
+  color: whitesmoke;
+  font-weight: bold;
+
+  top: 0;
+  left: 0;
+}
+.logo {
+  padding: 10px 0 10px 15px;
+  width: 160px;
+}
+.nav-items > ul {
+  list-style-type: none;
+  display: flex;
+  margin-right: 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-items > ul > li {
+  padding: 10px;
+  margin-right: 25px;
+}
+
+.nav-items > ul > li:hover {
+  color: orangered;
+  cursor: pointer;
+}
+
+.nav-items > ul > .login {
+  font-size: inherit;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* nav items CSS End*/
+
+/* Header CSS End*/
+
+/* Body CSS Start*/
+.res-container {
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+}
+.res-card {
+  width: 240px;
+  border-radius: 5px;
+  box-shadow: -1px 5px 10px 5px rgba(42, 42, 42, 0.2);
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+}
+.res-card:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
+.res-logo {
+  width: 100%;
+}
