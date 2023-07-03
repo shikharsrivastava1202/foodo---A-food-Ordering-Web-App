@@ -28,9 +28,10 @@
 - Body
 - - Search
 - - RestaurantContainer
-- - RestaurantCard
+-   - RestaurantCard
 -      - Img
--      - Name of Res, Star Rating, cuisine, delery tie
+-      - Name of Res, Star Rating, cuisine, delivery time
+- - Restaurant Menu Page
 - Footer
 - - Copyright
 - - Links
