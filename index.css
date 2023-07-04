@@ -82,3 +82,15 @@ a {
 .res-logo {
   width: 100%;
 }
+
+/*Footer css starts here*/
+.footer {
+  bottom: 0px;
+  left: 0px;
+  height: 80px;
+  background-color: burlywood;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 50px;
+}
