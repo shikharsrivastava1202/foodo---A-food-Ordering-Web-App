@@ -2,12 +2,13 @@ import React from "react";
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants.js";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus.js";
 const Header = () => {
   // super-powerful local state variable is created
   // whole component re-renders everytime with updated values of the local state variables
   const [loginBtn, setLoginBtn] = useState("Login");
 
-  console.log("header component rendered");
+  const onlineStatus = useOnlineStatus();
 
   return (
     <div className="header">
@@ -18,6 +19,7 @@ const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
+          <li>Status: {onlineStatus ? "✅Online" : "🔴Offline"}</li>
           <li>
             <Link to="/">Home</Link>
           </li>
@@ -26,6 +28,9 @@ const Header = () => {
           </li>
           <li>
             <Link to="/contact">Contact Us</Link>
+          </li>
+          <li>
+            <Link to="/grocery">Grocery</Link>
           </li>
           <li>Cart</li>
           <button
