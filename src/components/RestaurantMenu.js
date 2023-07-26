@@ -1,26 +1,19 @@
-import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
-import { MENU_API } from "../utils/constants";
+import useRestaurantMenu from "../utils/useRestrauntMenu.js";
 
 const RestaurantMenu = () => {
-  const [resInfo, setResInfo] = useState(null);
   const { resId } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
-  const fetchMenu = async () => {
-    const data = await fetch(MENU_API + resId);
-    const json = await data.json();
-    setResInfo(json.data);
-  };
+  const resInfo = useRestaurantMenu(resId);
 
   if (resInfo === null) return <Shimmer />;
 
-  const { name, cuisines, costForTwoMessage, deliveryTime } =
+  const { name, cuisines, costForTwoMessage, avgRating, areaName } =
     resInfo?.cards[0]?.card?.card?.info;
+
+  const { lastMileTravel, deliveryTime } =
+    resInfo?.cards[0]?.card?.card?.info?.sla;
 
   const { itemCards } =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
@@ -29,17 +22,26 @@ const RestaurantMenu = () => {
 
   return (
     <div className="menu">
-      <h1>{name}</h1>
-      <p>
-        {cuisines.join(", ")} - {costForTwoMessage}
-      </p>
-      <h4>{deliveryTime} minutes</h4>
+      <div className="res-info">
+        <h1>{name}</h1>
+        <h4>{areaName}</h4>
+        <p>
+          {cuisines.join(", ")} - {costForTwoMessage}
+        </p>
+        <h4>
+          {avgRating} - {"Stars"}
+        </h4>
+        <h4>{deliveryTime} minutes</h4>
+        <h4>{lastMileTravel} Km</h4>
+      </div>
+
       <h2>Menu</h2>
       <ul>
         {itemCards.map((item) => (
-          <li key={item.card.info.id}>
-            {item.card.info.name} -{" Rs."}
-            {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
+          <li key={item?.card?.info?.id}>
+            {item?.card?.info?.name} -{" Rs."}
+            {item?.card?.info?.price / 100 ||
+              item?.card?.info?.defaultPrice / 100}
           </li>
         ))}
       </ul>
