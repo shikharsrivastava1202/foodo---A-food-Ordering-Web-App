@@ -1,8 +1,11 @@
 import Shimmer from "./Shimmer";
+import { Component, useState } from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestrauntMenu.js";
+import RestaurantCatagory from "./RestaurantCatagory.js";
 
 const RestaurantMenu = () => {
+  const [showIndex, setShowIndex] = useState(null);
   const { resId } = useParams();
 
   const resInfo = useRestaurantMenu(resId);
@@ -15,15 +18,26 @@ const RestaurantMenu = () => {
   const { lastMileTravel, deliveryTime } =
     resInfo?.cards[0]?.card?.card?.info?.sla;
 
-  const { itemCards } =
-    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+  //earlier was showing only recommended dishes
 
-  console.log(itemCards);
+  // const { itemCards } =
+  //   resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
+
+  // console.log(itemCards);
+
+  const catagories =
+    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
+  console.log(catagories);
 
   return (
     <div className="menu">
-      <div className="res-info">
-        <h1>{name}</h1>
+      <div className="res-info text-center m-7">
+        <h1 className="font-bold text-[30px]">{name}</h1>
         <h4>{areaName}</h4>
         <p>
           {cuisines.join(", ")} - {costForTwoMessage}
@@ -34,17 +48,19 @@ const RestaurantMenu = () => {
         <h4>{deliveryTime} minutes</h4>
         <h4>{lastMileTravel} Km</h4>
       </div>
+      {/* catagory accordians */}
 
-      <h2>Menu</h2>
-      <ul>
-        {itemCards.map((item) => (
-          <li key={item?.card?.info?.id}>
-            {item?.card?.info?.name} -{" Rs."}
-            {item?.card?.info?.price / 100 ||
-              item?.card?.info?.defaultPrice / 100}
-          </li>
+      <div className="catagories ">
+        {catagories.map((catagory, index) => (
+          // now this is a controlled component because we are sending a state in props
+          <RestaurantCatagory
+            key={catagory?.card?.card?.title}
+            data={catagory?.card?.card}
+            showItems={index === showIndex ? true : false}
+            setShowIndex={() => setShowIndex(index)}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
